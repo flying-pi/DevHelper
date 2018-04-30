@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+  user_home:
+    container_name: user_home
+    env_file: ./envs/local.env
+    build:
+      context: ./UserHome/
+      dockerfile: Dockerfile
+    command: "python3 main.py"
+    volumes:
+      - './UserHome:/UserHome'
+    ports:
+      - "7000:7000"
+    links:
+      - mongodb
+
+  nginx:
+    restart: always
+    container_name: nginx
+    image: nginx:alpine
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - user_home
+
+volumes:
+  postgres:
+  upload_items:
+

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block head %}
+    <script src="/static/js/index.js"></script>
+{% endblock %}
+
+{% block body %}
+    <template id="common-wrapper">
+        <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+        <div class="user-home">
+            <div class="header-wrapper">
+                <div class="header">
+                    <h1 class="title">{{ greetings }}</h1>
+                    <auth-button/>
+                </div>
+            </div>
+        </div>
+        <content></content>
+    </template>
+
+    <script>
+
+        var importDoc = document.currentScript.ownerDocument;
+        var style = importDoc.querySelector('link');
+        document.head.appendChild(style);
+
+        class CommonContentWrapper extends HTMLElement {
+            constructor() {
+                super();
+
+                var template = importDoc.querySelector('#common-wrapper');
+
+                // import template into
+                var clone = document.importNode(template.content, true);
+
+                var root = this.createShadowRoot();
+                root.appendChild(clone);
+            }
+        }
+
+        window.customElements.define('common-content-wrapper', CommonContentWrapper);
+    </script>
+{% endblock %}

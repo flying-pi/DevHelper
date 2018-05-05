@@ -1,0 +1,15 @@
+.user-home .header-wrapper {
+    width: 100%;
+    background-color: #1a1d2e;
+}
+
+.user-home .header {
+    padding: 12px 24px;
+    color: #eefaff;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-home .header .title {
+}

@@ -4,15 +4,32 @@
 
 
 {% block head %}
- <link rel="import" href="/">
+    <link rel="import" href="/mainWrapper">
+
+    <script src="/static/js/login.js"></script>
 {% endblock %}
 
 {% block body %}
     <common-content-wrapper>
-    <div>
-        <p>Hello</p>
-        <p>word</p>
-        <p>!</p>
-    </div>
+        <div class="login_registration_container">
+            <form>
+                <p/>
+                <div class="form-input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                    <label for="email" class="registration-fileds">Email</label>
+                    <input type="email" name="email" id="email" class="registration-fileds">
+                </div>
+                <p/>
+                <p/>
+                <div class="form-submition">
+                    <input type="submit" value="Login">
+                    <input type="submit" value="Registration" id="registration-btn" formaction="/registration" formmethod="post">
+                </div>
+                <p/>
+            </form>
+        </div>
     </common-content-wrapper>
 {% endblock %}

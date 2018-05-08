@@ -1,21 +1,15 @@
 from sanic import Sanic
-from sanic.response import json
 from sanic_jinja2 import SanicJinja2
+from routers import base_blueprint
 
-app = Sanic()
+app = Sanic(__name__)
 app.static('/static', './static')
-
-jinja = SanicJinja2(app,pkg_path='static/templates')
-
-
-@app.route('/')
-async def index(request):
-    return jinja.render('index.html', request, greetings='Booooooo!')
+app.blueprint(base_blueprint)
 
 
-@app.route('/login')
-async def index(request):
-    return jinja.render('login.html', request, greetings='Booooooo!')
+jinja = SanicJinja2(app, pkg_path='static/templates')
+app.jinja = jinja
 
 if __name__ == '__main__':
+    # TODO use configuration
     app.run(host='0.0.0.0', port=7000, debug=True)

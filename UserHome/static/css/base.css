@@ -13,3 +13,31 @@
 
 .user-home .header .title {
 }
+
+.user-home .login_registration_container form {
+    display: grid;
+    margin: 24px auto;
+    grid-template-columns: 1fr min-content 1fr;
+    width: 100%;
+}
+
+.user-home .login_registration_container .form-input {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-gap: 10px;
+    width: 100%;
+    align-self: center;
+}
+
+.user-home .login_registration_container .form-submition {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    padding-top: 14px;
+    width: 100%;
+    align-self: center;
+}
+
+.user-home .login_registration_container .registration-fileds {
+    display: none;
+}

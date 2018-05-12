@@ -7,29 +7,31 @@
 {% set componentID = componentID|default('common-wrapper') -%}
 {% set componentJSClassName = componentJSClassName|default('CommonContentWrapper') -%}
 {% set componentHtmlName = componentHtmlName|default('common-content-wrapper') -%}
+{% set mixins = mixins|default('') -%}
 
-<template id="{{componentID}}">
-    {% block template_header %}{% endblock %}
+{% block scrypts %}{% endblock %}
+
+<template id="{{ componentID }}">
+    {% block styles %}{% endblock %}
     <div class="user-home">
         {% block body %}{% endblock %}
     </div>
     <content></content>
 </template>
- <script>
+<script src="/static/js/baseTemplate.js"></script>
 
-        var importDoc = document.currentScript.ownerDocument;
+{% block templateComponentDefinotion %}
+    <script>
 
-        class {{componentJSClassName}} extends HTMLElement {
+        class {{componentJSClassName}} extends aggregation(BaseComponentElement, {{ mixins }}) {
             constructor() {
-                super();
-                const template = importDoc.querySelector('#{{componentID}}');
-                const clone = document.importNode(template.content, true);
-                const root = this.createShadowRoot();
-                root.appendChild(clone);
+                super('#{{componentID}}');
             }
         }
-
-        window.customElements.define('{{componentHtmlName}}', {{componentJSClassName}});
     </script>
+{% endblock %}
+<script>
+    window.customElements.define('{{componentHtmlName}}', {{componentJSClassName}});
+</script>
 </body>
 </html>

@@ -4,11 +4,11 @@ from models import User
 
 
 async def index(request):
-    return request.app.jinja.render('mainWrapper.html', request, greetings='Booooooo!')
+    return request.app.jinja.render('mainWrapper.html', request, greetings='Dev helper')
 
 
 async def login(request):
-    return request.app.jinja.render('login.html', request, greetings='Booooooo!')
+    return request.app.jinja.render('login.html', request)
 
 
 async def registration(request):
@@ -23,4 +23,8 @@ async def registration(request):
 
 
 async def home(request):
-    return response.json({'tor': 'coool'})
+    return request.app.jinja.render('home.html', request)
+
+
+async def home_authorized(request):
+    return request.app.jinja.render('home_authorized.html', request)

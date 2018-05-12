@@ -3,10 +3,13 @@
 {% set componentID = 'common-wrapper' -%}
 {% set componentJSClassName = 'CommonContentWrapper' -%}
 {% set componentHtmlName = 'common-content-wrapper' -%}
+{% set mixins = 'LoginStatusMixin' -%}
 
-{% block template_header %}
+{% block scrypts %}
     <script src="/static/js/mainWrapper.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+{% endblock %}
+
+{% block styles %}
     <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
 {% endblock %}
 
@@ -17,5 +20,4 @@
             <auth-button/>
         </div>
     </div>
-
 {% endblock %}

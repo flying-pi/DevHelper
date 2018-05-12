@@ -22,5 +22,5 @@ async def registration(request):
     # return response.redirect('/home')
 
 
-async def home():
+async def home(request):
     return response.json({'tor': 'coool'})

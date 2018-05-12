@@ -4,6 +4,32 @@
 
 </head>
 <body>
-{% block body %}{% endblock %}
+{% set componentID = componentID|default('common-wrapper') -%}
+{% set componentJSClassName = componentJSClassName|default('CommonContentWrapper') -%}
+{% set componentHtmlName = componentHtmlName|default('common-content-wrapper') -%}
+
+<template id="{{componentID}}">
+    {% block template_header %}{% endblock %}
+    <div class="user-home">
+        {% block body %}{% endblock %}
+    </div>
+    <content></content>
+</template>
+ <script>
+
+        var importDoc = document.currentScript.ownerDocument;
+
+        class {{componentJSClassName}} extends HTMLElement {
+            constructor() {
+                super();
+                const template = importDoc.querySelector('#{{componentID}}');
+                const clone = document.importNode(template.content, true);
+                const root = this.createShadowRoot();
+                root.appendChild(clone);
+            }
+        }
+
+        window.customElements.define('{{componentHtmlName}}', {{componentJSClassName}});
+    </script>
 </body>
 </html>

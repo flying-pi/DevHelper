@@ -1,36 +1,21 @@
 {% extends 'baseTemplate.html' %}
 
+{% set componentID = 'common-wrapper' -%}
+{% set componentJSClassName = 'CommonContentWrapper' -%}
+{% set componentHtmlName = 'common-content-wrapper' -%}
+
+{% block template_header %}
+    <script src="/static/js/mainWrapper.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
+{% endblock %}
 
 {% block body %}
-    <template id="common-wrapper">
-        <script src="/static/js/mainWrapper.js"></script>
-        <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
-        <link rel="stylesheet" type="text/css" href="/static/css/base.css"/>
-        <div class="user-home">
-            <div class="header-wrapper">
-                <div class="header">
-                    <h1 class="title">{{ greetings }}</h1>
-                    <auth-button/>
-                </div>
-            </div>
+    <div class="header-wrapper">
+        <div class="header">
+            <h1 class="title">{{ greetings }}</h1>
+            <auth-button/>
         </div>
-        <content></content>
-    </template>
+    </div>
 
-    <script>
-
-        var importDoc = document.currentScript.ownerDocument;
-
-        class CommonContentWrapper extends HTMLElement {
-            constructor() {
-                super();
-                const template = importDoc.querySelector('#common-wrapper');
-                const clone = document.importNode(template.content, true);
-                const root = this.createShadowRoot();
-                root.appendChild(clone);
-            }
-        }
-
-        window.customElements.define('common-content-wrapper', CommonContentWrapper);
-    </script>
 {% endblock %}
